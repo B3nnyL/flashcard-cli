@@ -12,9 +12,19 @@ export function inBox(coloredText, textWidth) {
 }
 
 export function successRes(text: string): string {
-  return `✅ ${text}`;
+  const greenText = color(text, 'green')
+  return `✅ ${greenText}`;
 }
 
 export function failedRes(text: string): string {
-  return `❌ ${text}`;
+  const redText = color(text, 'red')
+  return `❌ ${redText}`;
+}
+
+export function frontRes(front: string): string {
+  return color(front, 'cyan');
+}
+
+export function backRes(back: string): string {
+  return color(back, 'cyan')
 }

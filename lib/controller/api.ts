@@ -3,6 +3,7 @@ import Card from '../models/Card';
 import {shuffle, orderByFamilarity} from '../helpers/order';
 import Storage from '../models/Storage';
 import Stack from "models/Stack";
+import { frontRes, inBox, backRes } from "helpers/render";
 
 export async function addCard(_stackName:string, _storage: Storage) {
   const { front, back, familarity } = await prompt([
@@ -155,6 +156,7 @@ export async function study(_studyMode: Array<Card>) {
   for(let _c of _studyMode){
     const front = _c.getContentFront();
     const back = _c.getContentBack();
+    inBox(frontRes(front), 150);
     const { next } = await prompt(
       {
         type: 'select',
@@ -163,6 +165,7 @@ export async function study(_studyMode: Array<Card>) {
         choices: ["yes", "no"]
       }
     );
+    inBox(backRes(back), 150);
     const { isKnown } = await prompt({
       type: "select",
       name: "familarity",
