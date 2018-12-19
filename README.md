@@ -4,27 +4,33 @@ A flashcard app lives in the terminal.
 ## Todos
 - [x] Setup
 - [x] CRUD cards
-- [ ] Learn with card (order, familarity, random)
+- [x] Learn with card (order, familarity, random)
 - [ ] Study summary
 - [ ] Format outputs
 - [ ] Travis
 - [ ] Docs
 
-## Command
+## Commands
+- show version
+  `fcard -v| --version`
 - show help
-  `fcard -h`
+  `fcard -h|--help`
 - show info about stacks
-  `fcard -a`
+  `fcard -a|--all`
 - show stack info
-  `facrd -stack [stackName]`
+  `fcard -show --stack [stackName]`
+- new stack
+  `fcard -add --stack [stackName]`
+- new card
+  `fcard -add --card [stackName]`
 - remove stack
-  `fcard -rf --stack [stackName]`
+  `fcard -remove --stack [stackName]`
 - remove card in stack
-  `fcard -rf --card [stackName] [card-id]`
+  `fcard -remove --card [stackName]`
 - edit stack's meta
-  `fcard -edit [stackName]`
-- edit card from a stack
-  `fcard -stack [stackName] --edit [card-id]`
+  `fcard -edit --stack [stackName]`
+- edit particular card for a stack
+  `fcard -edit --card [stackName]`
 - study a stack
-  `fcard study [stackName] --mode [suffle|order|familarity]`
+  `fcard --study [stackName] --mode [suffle|order|familarity]`
 
