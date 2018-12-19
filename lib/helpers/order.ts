@@ -7,7 +7,7 @@ export function shuffle(_cards: Array<Card>): Array<Card> {
   return _cards;
 }
 
-export function orderByFamilarity(_cards: Array<Card>): Array<Card> {
-  _cards.sort((a:Card, b:Card) => a.familarity - b.familarity)
+export function orderByFamilarity(_cards: Array<Card>, asc: number = 1): Array<Card> {
+  _cards.sort((a:Card, b:Card) => asc * (a.familarity - b.familarity))
   return _cards
 }
