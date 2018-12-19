@@ -1,5 +1,5 @@
 export default interface StackMeta {
     name: string,
-    created_time: Date,
+    createdTime: Date,
     author?: string
 }
