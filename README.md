@@ -6,8 +6,8 @@ A flashcard app lives in the terminal.
 - [x] CRUD cards
 - [x] Learn with card (order, familarity, random)
 - [ ] Study summary
-- [ ] Format outputs
-- [ ] Travis
+- [x] Format outputs
+- [x] Travis
 - [ ] Docs
 
 ## Commands
