@@ -23,7 +23,7 @@ export default class Storage {
     }
   }
 
-  getStack(fileName: string): Array<Card> {
+  getStack(fileName: string): Stack {
     if(this.isStorageDirExisted()){
       const tempFileName = join(this.storageDir, fileName + ".json");
       if (fs.existsSync(tempFileName)) {
@@ -32,7 +32,7 @@ export default class Storage {
         const _stack = new Stack(fileName);
         // if (jsonfiedContent.meta) _stack.setMeta(jsonfiedContent.meta);
         if (jsonfiedContent.cards) _stack.setCards(jsonfiedContent.cards);
-        return _stack.getCards();
+        return _stack
       } else {
         console.error("cant get stack");
       }

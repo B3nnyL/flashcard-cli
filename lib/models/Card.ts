@@ -33,5 +33,4 @@ export default class Card {
         this.content.content__front = newContent.content__front;
         this.content.content__back = newContent.content__back;
     }
-
 }
