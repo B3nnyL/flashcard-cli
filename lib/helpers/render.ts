@@ -10,3 +10,11 @@ export function inBox(coloredText, textWidth) {
   const boxenConig = { padding: 4, margin: 4, borderStyle: "double" };
   console.log(boxen(wrapAnsi(coloredText, textWidth), boxenConig));
 }
+
+export function successRes(text: string): string {
+  return `✅ ${text}`;
+}
+
+export function failedRes(text: string): string {
+  return `❌ ${text}`;
+}
