@@ -44,7 +44,7 @@ export default class Storage {
     if (fs.existsSync(this.storageDir)) {
       fs.readdirSync(this.storageDir).forEach(file => {
         const fileName = parse(file).name;
-        const content = this.getStack(fileName);
+        const content = this.getStack(fileName).getCards();
         data = [...content];
       });
     }

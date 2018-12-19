@@ -24,7 +24,7 @@ describe("Storage can", () => {
   });
 
   test("get stack", () => {
-    const returnedStack = storage.getStack(stack_1.meta.name);
+    const returnedStack = storage.getStack(stack_1.meta.name).getCards();
     const expectedStack = stack.getCards();
     expect(JSON.stringify(returnedStack)).toEqual(JSON.stringify(expectedStack));
   });
