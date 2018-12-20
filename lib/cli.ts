@@ -120,8 +120,27 @@ if(flags.edit) {
     try{
       editCard(storage, input[0]);
     }catch(e) {
-      const error = failedRes(`Not able to edit card`);
+      const error = failedRes(`Not able to edit card ${input[0]}`);
       console.log(error)
+    }
+  }
+}
+
+if(flags.remove){
+  if(flags.stack) {
+    try {
+      removeStack(flags.stack,storage)
+    } catch(e) {
+      const error = failedRes(`error with storage`);
+      console.log(error);
+    }
+  }
+  if(flags.card) {
+    try {
+      removeCard(input[0], storage)
+    } catch(e) {
+      const error = failedRes(`Can't remove card ${input[0]}`);
+      console.log(error);
     }
   }
 }
