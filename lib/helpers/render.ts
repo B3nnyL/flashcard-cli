@@ -13,12 +13,12 @@ export function inBox(coloredText, textWidth) {
 
 export function successRes(text: string): string {
   const greenText = color(text, 'green')
-  return `✅ ${greenText}`;
+  return `✅   ${greenText}`;
 }
 
 export function failedRes(text: string): string {
   const redText = color(text, 'red')
-  return `❌ ${redText}`;
+  return `❌  ${redText}`;
 }
 
 export function frontRes(front: string): string {
