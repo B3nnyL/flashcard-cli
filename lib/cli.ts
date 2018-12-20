@@ -1,35 +1,106 @@
-import minimist from 'minimist';
+#!/usr/bin/env node
+
+import * as meow from 'meow';
 import { addCard, createStack, showStackMeta,removeCard, removeStack, editCard, editStackMeta, study, studyMode } from './controller/api';
-import Storage from 'models/Storage';
+import Storage from './models/Storage';
+import { failedRes , successRes} from './helpers/render'
 
-const args = minimist(process.argv.slice(2), {
-  string: ["stack", "card", "mood", "study"], // --lang xml
-  boolean: ["version", "help", "all", "show", "add", "remove", "edit"], // --version
-  alias: { v: "version", h: "help", a: "all" },
-  stopEarly: true
-});
 
+const cli = meow(
+  `
+  Usage
+      fcard - v | --version
+  Show help
+      fcard - h | --help
+  Show info about stacks
+      fcard - a | --all
+  Show stack info
+      fcard --show --stack [stackName]
+  Add new stack
+      fcard --add --stack [stackName]
+  Edit stack's meta
+    fcard --edit --stack[stackName]
+  Add new card to a stack
+      fcard --add --card [stackName]
+  Remove stack
+      fcard --remove --stack [stackName]
+  Remove card from a stack
+      fcard --remove --card [stackName]
+  Edit a particular card from a stack
+      fcard --edit --card [stackName]
+  study a stack
+      fcard --study [stackName] --mode [suffle | order(default) | familarity]
+`,
+  {
+    flags: {
+      help: {
+        type: "boolean",
+        alias: "h"
+      },
+      version: {
+        type: "boolean",
+        alias: "v"
+      },
+      show: {
+        type: "boolean"
+      },
+      add: {
+        type: "boolean"
+      },
+      remove: {
+        type: "boolean"
+      },
+      edit: {
+        type: "boolean",
+      },
+      stack: {
+        type: "string",
+        alias: "s"
+      },
+      card: {
+        type: "string",
+        alias: "c"
+      },
+      study: {
+        type: "string"
+      },
+      mode: {
+        type: "string",
+        alias: "m"
+      }
+    }
+  }
+);
+
+
+console.log(cli.input, cli.flags);
+
+const {input, flags} = cli;
 const storage = new Storage();
-
-if(args.show && args.stack){
-  showStackMeta(storage, args.stack);
-} else if(args.version){
-  console.log('233');
-} else if(args.help){
-  console.log('help');
-} else if(args.add && args.stack){
-  createStack(storage);
-} else if(args.add && args.card){
-  addCard(args.card, args.stack);
-} else if(args.remove && args.card){
-  removeCard(args.card, storage);
-} else if(args.remove && args.stack){
-  removeStack(args.stack, storage);
-} else if(args.edit && args.card){
-  editCard(storage, args.card)
-} else if(args.edit && args.stack){
-  editStackMeta(storage, args.stack)
-} else if(args.study && args.stack){
-  const array = studyMode(args.stack, args._[0], storage);
-  study(array);
+if(flags.show){
+  if(flags.stack){
+    try{
+      showStackMeta(storage, flags.stack)
+    }catch(e){
+      const error = failedRes(`No stack ${flags.stack} is found`);
+      console.log(error)
+    }
+  }
+}
+if(flags.add){
+  if(flags.stack){
+    try{
+      createStack(storage);
+    }catch(e){
+      console.log(failedRes('error with storage'))
+    }
+  }
+  if(flags.card){
+    try{
+      addCard(input[0],storage);
+    }catch(e){
+      const error = failedRes(`No stack ${flags.stack} is found`);
+      console.log(error)
+    }
+  }
 }
