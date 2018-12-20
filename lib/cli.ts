@@ -19,7 +19,7 @@ const cli = meow(
   Add new stack
       fcard --add --stack [stackName]
   Edit stack's meta
-    fcard --edit --stack[stackName]
+    fcard --edit --stack [stackName]
   Add new card to a stack
       fcard --add --card [stackName]
   Remove stack
@@ -77,6 +77,7 @@ console.log(cli.input, cli.flags);
 
 const {input, flags} = cli;
 const storage = new Storage();
+
 if(flags.show){
   if(flags.stack){
     try{
@@ -87,6 +88,7 @@ if(flags.show){
     }
   }
 }
+
 if(flags.add){
   if(flags.stack){
     try{
@@ -100,6 +102,25 @@ if(flags.add){
       addCard(input[0],storage);
     }catch(e){
       const error = failedRes(`No stack ${flags.stack} is found`);
+      console.log(error)
+    }
+  }
+}
+
+if(flags.edit) {
+  if(flags.stack) {
+    try {
+      editStackMeta(storage, flags.stack);
+    } catch(e){
+      const error = failedRes(`Not able to edit stack`);
+      console.log(error);
+    }
+  }
+  if(flags.card) {
+    try{
+      editCard(storage, input[0]);
+    }catch(e) {
+      const error = failedRes(`Not able to edit card`);
       console.log(error)
     }
   }
