@@ -53,6 +53,10 @@ describe('Stack can ', () => {
     expect(stack.getCards().length).toBe(updatedStack);
   })
 
+  test('can get total card count', () => {
+    expect(stack.getCount()).toBe('3');
+  })
+
   test('remove card1', () => {
     const expectecCard = stack.getCards()[0];
     stack.removeCard(expectecCard._id);
