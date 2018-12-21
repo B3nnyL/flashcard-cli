@@ -3,6 +3,7 @@ import * as os from 'os';
 import * as fs from 'fs';
 import Stack from '../models/Stack';
 import Card from '../models/Card';
+import { STORE_DIR } from '../utils/envConfig';
 
 const { join, parse } = path;
 
@@ -11,7 +12,7 @@ export default class Storage {
   storageFileName: string;
 
   constructor() {
-    this.storageDir = join(os.homedir(), ".fcards");
+    this.storageDir = join(os.homedir(), STORE_DIR);
   }
 
   isStorageDirExisted():boolean {
