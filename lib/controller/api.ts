@@ -2,25 +2,25 @@ import { prompt } from "enquirer";
 import Card from '../models/Card';
 import {shuffle, orderByFamilarity} from '../helpers/order';
 import Storage from '../models/Storage';
-import Stack from "models/Stack";
-import { frontRes, inBox, backRes } from "helpers/render";
+import Stack from "../models/Stack";
+import { frontRes, inBox, backRes } from "../helpers/render";
 
 export async function addCard(_stackName:string, _storage: Storage) {
   const { front, back, familarity } = await prompt([
     {
       type: 'input',
       name: 'front',
-      message: 'Add front cover'
+      message: 'Enter content of front cover for the new card'
     },
     {
       type: 'input',
       name: 'back',
-      message: 'Add back cover'
+      message: 'Enter content of back cover for the new card'
     },
     {
       type: 'select',
       name: 'familarity',
-      message: 'How familar?',
+      message: 'How familar are you with the card?',
       choices: [1, 2, 3, 4, 5]
     }
   ]);
@@ -34,11 +34,11 @@ export async function setFamilarity(_stackName:string, _storage: Storage) {
   const { familarity,id } = await prompt([{
     type: "input",
     name: "id",
-    message: "Id of card"
+    message: "Input id of the card"
   },{
     type: 'select',
     name: 'familarity',
-    message: 'How familar?',
+    message: 'Rate familarity',
     choices: [1, 2, 3, 4, 5],
   }]);
   const _stack = _storage.getStack(_stackName);
@@ -66,7 +66,7 @@ export async function editCard( _storage:Storage ,_stackName:string) {
     {
       type: "select",
       name: "familarity",
-      message: "How familar?",
+      message: "How familar are you with this card?",
       choices: [1, 2, 3, 4, 5]
     }
   ]);
@@ -99,29 +99,29 @@ export async function createStack(_storage: Storage) {
   const { stackName, author } = await prompt([{
     type: 'input',
     name: 'stackName',
-    message: 'stack of name'
+    message: 'Give new stack a name'
   },{
       type: 'input',
       name: 'author',
-      message: 'author name'
+      message: 'Leave author\'s name'
   }]);
   const stack = new Stack(stackName, author)
   _storage.saveFile(stack);
 }
 
-export function showStackMeta(_storage: Storage, _stackName: string): string{
-  return _storage.getStack(_stackName).getName();
+export function showStackMeta(_storage: Storage, _stackName: string){
+  console.log( _storage.getStack(_stackName).getName())
 }
 
 export async function editStackMeta(_storage: Storage, _stackName: string){
   const { stackName, author } = await prompt([{
     type: 'input',
     name: 'stackName',
-    message: 'stack of name'
+    message: 'Stack\'s name'
   }, {
     type: 'input',
     name: 'author',
-    message: 'author name'
+    message: 'author\'s name'
   }]);
   let _stack = _storage.getStack(_stackName);
   _stack.setMeta(stackName,author);
@@ -161,7 +161,7 @@ export async function study(_studyMode: Array<Card>) {
       {
         type: 'select',
         name: 'next',
-        message: 'Next step?',
+        message: 'Flip it',
         choices: ["yes", "no"]
       }
     );
@@ -169,7 +169,7 @@ export async function study(_studyMode: Array<Card>) {
     const { isKnown } = await prompt({
       type: "select",
       name: "familarity",
-      message: "How familar?",
+      message: "Rate familiarity",
       choices: [1, 2, 3, 4, 5]
     });
   }

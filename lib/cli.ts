@@ -144,3 +144,13 @@ if(flags.remove){
     }
   }
 }
+
+if(flags.study){
+  try {
+    const _cards = studyMode(flags.study, flags.mode, storage);
+    study(_cards);
+  } catch(e) {
+    const error = failedRes(`Can't study cards from ${flags.study}`);
+    console.log(error);
+  }
+}
