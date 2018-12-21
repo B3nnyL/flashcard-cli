@@ -26,6 +26,11 @@ export default class Stack {
         return this.meta.name
     }
 
+    getCount(): string {
+        const amount = this.cards ? this.cards.length.toString() : 'No card exist';
+        return amount
+    }
+
     setMeta(_name: string, _author?: string) {
         this.meta.name = _name
         if(_author) this.meta.author = _author
