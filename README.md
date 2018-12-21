@@ -1,4 +1,6 @@
-# fcard-cli
+# fcard-cli [in-progress]
+[![Build Status](https://travis-ci.com/B3nnyL/flashcard-cli.svg?token=RUf6HBtiz9iZAUZjDB8Q&branch=master)](https://travis-ci.com/B3nnyL/flashcard-cli)
+
 A flashcard app lives in the terminal.
 
 ## Todos
