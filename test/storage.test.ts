@@ -7,6 +7,7 @@ import Storage from '../lib/models/Storage';
 import Stack from '../lib/models/Stack';
 import Card from '../lib/models/Card';
 import { card_1, card_2, stack_1 } from './mock';
+import { STORE_DIR } from '../lib/utils/envConfig';
 
 describe("Storage can", () => {
   const storage = new Storage();
@@ -39,7 +40,7 @@ describe("Storage can", () => {
   });
 
   afterAll(() => {
-    const dir = join(os.homedir(), ".fcards");
+    const dir = join(os.homedir(), STORE_DIR);
     fs.rmdirSync(dir);
   })
 
