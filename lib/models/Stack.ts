@@ -11,29 +11,29 @@ export default class Stack {
             createdTime: date,
             author: _author
         }
-        if(_cards) this.cards = _cards
+        if(_cards) this.cards = _cards;
     }
 
     getCards(): Array<Card> {
-        if(this.cards) return this.cards
+        if(this.cards) return this.cards;
     }
 
     setCards(_cards: Array<Card>) {
-        this.cards = _cards
+        this.cards = _cards;
     }
 
     getName(): string {
-        return this.meta.name
+        return this.meta.name;
     }
 
     getCount(): string {
         const amount = this.cards ? this.cards.length.toString() : 'No card exist';
-        return amount
+        return amount;
     }
 
     setMeta(_name: string, _author?: string) {
-        this.meta.name = _name
-        if(_author) this.meta.author = _author
+        this.meta.name = _name;
+        if(_author) this.meta.author = _author;
     }
 
     getCard(id: string): Card {
