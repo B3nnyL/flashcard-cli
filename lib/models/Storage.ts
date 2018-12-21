@@ -1,8 +1,8 @@
 import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs';
-import Stack from './Stack';
-import Card from './Card';
+import Stack from '../models/Stack';
+import Card from '../models/Card';
 
 const { join, parse } = path;
 
@@ -30,8 +30,9 @@ export default class Storage {
         const content = fs.readFileSync(tempFileName, "utf8");
         const jsonfiedContent = JSON.parse(content);
         const _stack = new Stack(fileName);
-        // if (jsonfiedContent.meta) _stack.setMeta(jsonfiedContent.meta);
-        if (jsonfiedContent.cards) _stack.setCards(jsonfiedContent.cards);
+        if (jsonfiedContent.cards) {
+          _stack.setCards(jsonfiedContent.cards);
+        }
         return _stack
       } else {
         console.error("cant get stack");
@@ -56,10 +57,10 @@ export default class Storage {
       if (data) {
         const fileName = join(this.storageDir, data.meta.name + '.json');
         fs.writeFileSync(fileName, JSON.stringify(data), 'utf8');
-        return true
+        return true;
       }
     } else {
-      return false
+      return false;
     }
   }
 
