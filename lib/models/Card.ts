@@ -9,7 +9,7 @@ export default class Card {
     constructor(_content:Content, _familarity = 1) {
         this._id = uuid();
         this.createdTime = new Date();
-        this.content = _content
+        this.content = _content;
         this.familarity = _familarity;
     }
 
